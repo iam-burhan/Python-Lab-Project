@@ -1,0 +1,29 @@
+{% extends "base.html" %}{% block body %}
+<section class="hero reveal"><span class="pill">✦ New · Instant auto-grading for Python labs</span>
+<h1>Your lab, graded <em>before you finish your chai.</em></h1>
+<p>No more walking from PC to PC. Students submit from anywhere, code is tested automatically, and professors see every score, log and deadline in one beautiful dashboard.</p>
+<div class="cta"><a class="btn big" href="/register">Start free →</a><a class="btn ghost big" href="/login">Live demo</a></div>
+<small class="muted">Demo: prof@lab.edu · student@lab.edu · password demo123</small>
+<div class="term card"><div class="dots"><i></i><i></i><i></i></div>
+<pre><span class="l" style="--d:.2s">$ python lab2_add.py</span>
+<span class="l" style="--d:.9s">&gt;&gt;&gt; a, b = int(input()), int(input())</span>
+<span class="l" style="--d:1.5s">&gt;&gt;&gt; print(a + b)</span>
+<span class="l ok" style="--d:2.2s">✔ Test 1 PASS   ✔ Test 2 PASS   ✔ Test 3 PASS</span>
+<span class="l ok" style="--d:2.8s">★ Auto-graded 10 / 10 in 0.4s</span></pre></div></section>
+<div class="marq"><div>{% for i in range(2) %}<span>Auto-grading</span><span>Weekly tests</span><span>Monthly exams</span><span>Yearly reviews</span><span>Daily lab logs</span><span>Leaderboards</span><span>CSV export</span><span>Role-based access</span>{% endfor %}</div></div>
+<section class="bento">
+<div class="card reveal span2 tilt"><h3>⚡ Auto-grading engine</h3><p>Define input → output test cases. Every submission is run and scored instantly, with per-test feedback.</p></div>
+<div class="card reveal tilt"><h3>📅 Smart schedules</h3><p>Weekly, monthly, yearly assessments.</p></div>
+<div class="card reveal tilt"><h3>📓 Lab logs</h3><p>Daily records, verified by professors.</p></div>
+<div class="card reveal tilt"><h3>👥 Roster view</h3><p>Every student's average and lab hours.</p></div>
+<div class="card reveal span2 tilt"><h3>📈 Live analytics</h3><p>Class average, pending reviews, animated leaderboard, and one-click CSV grade export.</p></div></section>
+<section class="steps"><h2 class="reveal">How it works</h2>
+<div class="card reveal"><b>01</b><h3>Schedule</h3><p>Professor posts a lab with deadline and test cases.</p></div>
+<div class="card reveal"><b>02</b><h3>Submit</h3><p>Students paste code and log their session.</p></div>
+<div class="card reveal"><b>03</b><h3>Evaluate</h3><p>Auto-score appears instantly; professor reviews and overrides.</p></div></section>
+<section class="faq reveal"><h2>FAQ</h2>
+<details><summary>Do students need to install anything?</summary><p>No. It runs in any browser, on phone or laptop.</p></details>
+<details><summary>Can professors override auto-grades?</summary><p>Yes. Marks and feedback are always editable.</p></details>
+<details><summary>Which languages are supported?</summary><p>Python auto-grading today; manual review works for any language.</p></details></section>
+<section class="card reveal final"><h2>Ready to stop walking between PCs?</h2><a class="btn big" href="/register">Create your lab →</a></section>
+<footer class="muted">© 2026 LabPulse · Built with Flask</footer>{% endblock %}

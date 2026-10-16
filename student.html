@@ -1,0 +1,17 @@
+{% extends "base.html" %}{% block body %}
+<h2 class="reveal">Hi {{ session.name.split()[0] }} 👋</h2>
+<div class="stats">
+<div class="card stat reveal"><b data-count="{{ prog }}" data-suffix="%">0</b><span>Completed</span></div>
+<div class="card stat reveal"><b data-count="{{ avg }}" data-suffix="%">0</b><span>Avg score</span></div>
+<div class="card stat reveal"><b data-count="{{ hours|round(1) }}">0</b><span>Lab hours</span></div></div>
+<div class="grid2">
+<div class="card reveal"><h3>Assessments</h3>
+{% for r in rows %}<a class="item" href="/assignment/{{ r.id }}"><div><b>{{ r.title }}</b><small class="muted">{{ r.kind }} · due {{ r.due }}</small></div>
+{% if r.marks is not none %}<span class="tag ok">{{ r.marks }}/{{ r.max_marks }}</span>{% elif r.sub_at %}<span class="tag">Submitted</span>{% else %}<span class="tag warn">Open</span>{% endif %}</a>
+{% else %}<p class="muted">Nothing scheduled.</p>{% endfor %}</div>
+<div class="card reveal"><h3>Log today's lab session</h3>
+<form method="post" action="/log"><div class="row"><label>Date<input type="date" name="day" value="{{ today }}" required></label>
+<label>Hours<input type="number" step="0.5" name="hours" value="2" min="0.5" required></label></div>
+<label>Topic<input name="topic" required></label><label>Notes<textarea name="notes" rows="2"></textarea></label><button class="btn">Save log</button></form></div></div>
+<div class="card reveal"><h3>Recent lab logs</h3><table><tr><th>Date</th><th>Topic</th><th>Hours</th></tr>
+{% for l in logs %}<tr><td>{{ l.day }}</td><td>{{ l.topic }}</td><td>{{ l.hours }}</td></tr>{% endfor %}</table></div>{% endblock %}

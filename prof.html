@@ -1,0 +1,20 @@
+{% extends "base.html" %}{% block body %}
+<h2 class="reveal">Professor dashboard</h2>
+<div class="stats">
+<div class="card stat reveal"><b data-count="{{ stats.students }}">0</b><span>Students</span></div>
+<div class="card stat reveal"><b data-count="{{ stats.assignments }}">0</b><span>Assessments</span></div>
+<div class="card stat reveal"><b data-count="{{ stats.pending }}">0</b><span>To grade</span></div>
+<div class="card stat reveal"><b data-count="{{ stats.avg }}" data-suffix="%">0</b><span>Class avg</span></div></div>
+<div class="grid2">
+<div class="card reveal"><h3>Schedule an assessment</h3>
+<form method="post" action="/assignment/new">
+<label>Title<input name="title" required></label><label>Description<textarea name="descr" rows="3" required></textarea></label>
+<div class="row"><label>Frequency<select name="kind"><option>weekly</option><option>monthly</option><option>yearly</option></select></label>
+<label>Max marks<input type="number" name="max_marks" value="10" min="1" required></label></div>
+<label>Due date<input type="date" name="due" required></label><label>Auto-grade tests (optional): one per line, <code>input => expected</code>, use ; for new lines<textarea class="code" name="tests" rows="3" placeholder="2;3 => 5"></textarea></label><button class="btn">Schedule</button></form></div>
+<div class="card reveal"><h3>Leaderboard</h3>
+{% for b in board %}<div class="bar"><span>{{ b.name }}</span><div><i style="--w:{{ b.pct }}%"></i></div><b>{{ b.pct|int }}%</b></div>
+{% else %}<p class="muted">No graded work yet.</p>{% endfor %}</div></div>
+<div class="card reveal"><h3>Assessments</h3><table><tr><th>Title</th><th>Type</th><th>Due</th><th>Submitted</th><th>Pending</th><th></th></tr>
+{% for r in rows %}<tr><td>{{ r.title }}</td><td><span class="tag">{{ r.kind }}</span></td><td>{{ r.due }}</td><td>{{ r.subs }}</td><td>{{ r.pend }}</td><td><a class="btn ghost sm" href="/assignment/{{ r.id }}">Review →</a></td></tr>{% endfor %}</table></div>
+{% endblock %}

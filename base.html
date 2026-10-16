@@ -1,0 +1,12 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}LabPulse{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script>document.documentElement.dataset.theme=localStorage.getItem('lp-theme')||'midnight'</script></head><body>
+<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+<nav class="nav"><a class="logo" href="/">◉ LabPulse</a>
+<div class="links"><div class="sw" title="Theme"><button data-t="midnight"></button><button data-t="emerald"></button><button data-t="ember"></button><button data-t="crimson"></button></div>{% if session.uid %}<a href="/dashboard">Dashboard</a>{% if session.role=='professor' %}<a href="/monitor">Monitor</a><a href="/export.csv">Export</a>{% endif %}<span class="chip">{{ session.name }}</span><a class="btn ghost" href="/logout">Logout</a>
+{% else %}<a href="/login">Log in</a><a class="btn" href="/register">Get started</a>{% endif %}</div></nav>
+{% with m = get_flashed_messages() %}{% for x in m %}<div class="toast">{{ x }}</div>{% endfor %}{% endwith %}
+<main>{% block body %}{% endblock %}</main>
+<script src="{{ url_for('static', filename='app.js') }}"></script></body></html>

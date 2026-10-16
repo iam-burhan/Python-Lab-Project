@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block body %}
+<section class="auth card reveal"><h2>{{ 'Welcome back' if mode=='login' else 'Create your account' }}</h2>
+<form method="post">
+{% if mode=='register' %}<label>Full name<input name="name" required></label>{% endif %}
+<label>Email<input type="email" name="email" required></label>
+<label>Password<input type="password" name="password" required minlength="6"></label>
+{% if mode=='register' %}<label>I am a<select name="role"><option value="student">Student</option><option value="professor">Professor</option></select></label>{% endif %}
+<button class="btn big">{{ 'Log in' if mode=='login' else 'Sign up' }}</button></form>
+<p class="muted">{% if mode=='login' %}New here? <a href="/register">Register</a>{% else %}Have an account? <a href="/login">Log in</a>{% endif %}</p></section>{% endblock %}

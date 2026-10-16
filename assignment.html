@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block body %}
+<a class="muted" href="/dashboard">← Back</a>
+<div class="card reveal"><span class="tag">{{ a.kind }}</span><h2>{{ a.title }}</h2><p>{{ a.descr }}</p><small class="muted">Due {{ a.due }} · {{ a.max_marks }} marks</small></div>
+{% if session.role=='student' %}
+<div class="card reveal"><h3>Your submission</h3>
+{% if s and s.marks is not none %}<p><span class="tag ok">{{ s.marks }}/{{ a.max_marks }}</span> {{ s.feedback }}</p>{% endif %}
+{% if s and s.auto %}<pre>{{ s.auto }}</pre>{% elif a.tests %}<p class="muted">⚡ Auto-graded: your code runs against hidden-style test cases the moment you submit.</p>{% endif %}<form method="post"><label>Code<textarea class="code" name="code" rows="12" required>{{ s.code if s }}</textarea></label>
+<label>Explanation<textarea name="note" rows="3">{{ s.note if s }}</textarea></label><button class="btn">{{ 'Resubmit' if s else 'Submit' }}</button></form></div>
+{% else %}{% for s in subs %}<div class="card reveal"><h3>{{ s.name }} <small class="muted">{{ s.at }}</small></h3>
+<pre>{{ s.code }}</pre>{% if s.auto %}<pre>{{ s.auto }}</pre>{% endif %}<p class="muted">{{ s.note }}</p>
+<form method="post" action="/grade/{{ s.id }}" class="row"><label>Marks<input type="number" name="marks" min="0" max="{{ a.max_marks }}" value="{{ s.marks if s.marks is not none }}" required></label>
+<label>Feedback<input name="feedback" value="{{ s.feedback or '' }}"></label><button class="btn">Save grade</button></form></div>
+{% else %}<p class="muted">No submissions yet.</p>{% endfor %}{% endif %}{% endblock %}

@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block body %}
+<h2 class="reveal">Monitor progress</h2>
+<div class="card reveal"><h3>Student roster</h3><table><tr><th>Student</th><th>Email</th><th>Submissions</th><th>Avg %</th><th>Lab hours</th></tr>
+{% for r in roster %}<tr><td>{{ r.name }}</td><td>{{ r.email }}</td><td>{{ r.subs }}</td><td>{{ r.pct|int if r.pct is not none else '—' }}</td><td>{{ r.hrs }}</td></tr>{% endfor %}</table></div>
+<div class="card reveal"><h3>Daily lab logs</h3><table><tr><th>Date</th><th>Student</th><th>Topic</th><th>Hrs</th><th>Notes</th><th></th></tr>
+{% for l in logs %}<tr><td>{{ l.day }}</td><td>{{ l.name }}</td><td>{{ l.topic }}</td><td>{{ l.hours }}</td><td>{{ l.notes }}</td>
+<td>{% if l.ok %}<span class="tag ok">Verified</span>{% else %}<form method="post" action="/log/{{ l.id }}/approve"><button class="btn sm">Verify</button></form>{% endif %}</td></tr>{% endfor %}</table></div>{% endblock %}
